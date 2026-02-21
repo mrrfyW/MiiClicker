@@ -1,8 +1,6 @@
 # Mii Clicker - Local Version
 This is a preserved and playable version of **Mii Clicker** (originally at [miis.whatastupididea.com](https://miis.whatastupididea.com)), archived before its shutdown on February 20th, 2026 at roughly 10:01:10 PM EST.
 
----
-
 ## Prerequisites
 You need Python3 installed (which comes pre-installed on macOS and most Linux distros; but its downloadable at https://python.org for Windows) to run the server.
 
@@ -20,8 +18,6 @@ Step 3: Open the Game
 
 Press `Ctrl+C` in the terminal to stop the server when done.
 
----
-
 ## What Works
 - Home page, with easter eggs and fake BlueSky authentication
 - All SFX and background music
@@ -34,15 +30,11 @@ Press `Ctrl+C` in the terminal to stop the server when done.
 ## What Doesn't Work
 - "People have played" number updates (uses preset number for all the currently stored records, haven't figured out how to update that yet lol)
 
----
-
 ## Notes
 - Rendering Miis still work because the original site uses an external API (see fowel.js), and requires an internet connection to work properly.
 - Your own scores are saved in your browser's `localStorage` under `mii_clicker_local_records`, and will persist between sessions.
 - Fake BlueSky authentications will go into your browser's cookies. Don't type any real login details, just in case you get hacked!
 - To see the full list of records and posts, go to mock-api.js and find the `_ALLTIME_RECORDS` variable.
-
----
 
 *Mii Clicker was created by [@dwyazzo90](https://github.com/dwyazzo90) (David Joaq). Mii rendering API is by [@ariankordi](https://github.com/ariankordi) and can be found at [mii-unsecure.ariankordi.net](https://mii-unsecure.ariankordi.net)`.*  
 *This local version was preserved for archival purposes, and is not affiliated with Project Rosé.*

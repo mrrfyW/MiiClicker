@@ -1,0 +1,1471 @@
+@font-face {
+    font-family: "nintendo";
+    src:
+        url("../font/nintendoNTLG-DB001.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "miiverse";
+    src:
+        url("../font/MiiverseSymbols-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --width: 800px;
+    --height: 100vh;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "nintendo", system-ui, sans-serif !important;
+}
+
+.logo {
+    image-rendering: pixelated;
+    height: 157px;
+    width: 530px;
+    display: flex;
+    margin: auto;
+    margin-bottom: 20px;
+    position: relative;
+    margin-top: 4px;
+    flex-direction: column;
+}
+
+.logo p {
+    position: absolute;
+    bottom: 6px;
+    font-size: 23px;
+    right: 0;
+    margin: 0;
+}
+
+.bsky-loggedin {
+    background: #00b6ff;
+    display: flex;
+    margin-top: 25px;
+    width: 500px;
+    color: #fff;
+    overflow: hidden;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.40);
+    border: 3px dashed #fff;
+    border-radius: 20px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bsky-loggedin p {
+    font-size: 24px;
+    text-align: center;
+    width: 100%;
+}
+
+.bsky-loggedin p>span {
+    font-size: 32px;
+    display: block;
+    overflow: hidden;
+    padding: 10px 15px;
+    padding-bottom: 0px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.bsky-loggedin a {
+    height: 55px;
+    width: 400px;
+    margin-bottom: 20px;
+    font-size: 25px;
+}
+
+
+
+img {
+    -webkit-user-drag: none !important;
+    user-drag: none !important;
+}
+
+.screen {
+    position: relative;
+    width: var(--width);
+    height: 100%;
+    margin: auto;
+    min-height: var(--height);
+    z-index: 1;
+    display: none !important;
+}
+
+.title-screen {
+    background: #ffffff;
+}
+
+.active-screen {
+    z-index: 1000 !important;
+    display: block !important;
+}
+
+.bsky-post-modal {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.70);
+    background-image: url(../img/pattern.png);
+    background-size: 18px;
+    z-index: 9999;
+    height: var(--height);
+    top: 50%;
+    overflow: hidden;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: var(--width);
+    margin: auto;
+}
+
+.bsky-post-modal .panel {
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    transform: translate(-50%, 100%);
+    /* start below */
+    animation: slideUp 1s ease-in-out forwards;
+}
+
+.bsky-post-modal .panel.down {
+    animation: slideDown 1s ease-in-out forwards;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 10%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+        /* center */
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+
+    to {
+        opacity: 0;
+        transform: translate(-50%, 10%);
+        /* center */
+    }
+}
+
+.bsky-post-modal .spoiler-button {
+    width: 250px;
+    position: absolute;
+    right: 8px;
+    top: 110px;
+    font-size: 26px;
+    text-align: center;
+    border-radius: 10px;
+    padding-left: 50px;
+    display: flex;
+    text-shadow: 0px 2px #fff;
+    box-shadow: inset 0px 0px 2px 3px rgba(255, 255, 255, 0.70);
+    background: linear-gradient(180deg, #ffffff, #ffffff, #e3e3e3);
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+.bottom-buttons {
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    background: linear-gradient(180deg, #ffffff, #e3e3e3);
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+.bottom-buttons a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    -webkit-user-drag: none !important;
+    user-drag: none !important;
+    font-size: 28px;
+    color: #323232;
+    text-shadow: 0px 2px #fff;
+    text-align: center;
+    border-right: 2px solid #919191;
+    justify-content: center;
+    align-items: center;
+}
+
+.bsky-post-modal .panel-button.confirm,
+.mii-score-details-modal-container .view-post-bsky {
+    border-right: 0;
+    border-left: 2px solid #fff;
+}
+
+.bottom-buttons a.disabled {
+    opacity: 0.5;
+}
+
+.bsky-post-modal .spoiler-button input {
+    width: 100%;
+    position: absolute;
+    right: 0px;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    cursor: pointer;
+    appearance: none;
+    top: 0%;
+    height: 100%;
+}
+
+.bsky-post-modal .spoiler-button:active {
+    background: linear-gradient(180deg, #ff9b4f, #ffd8c1);
+    box-shadow: inset 2px 3px 2px 0px rgba(0, 0, 0, 0.30);
+    color: #9e2f00;
+    text-shadow: none;
+}
+
+.bsky-post-modal .spoiler-button:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(180deg, #d0d0d0, #6b6b6b);
+    width: 50px;
+    height: 100%;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    box-shadow: inset 1px 0px 2px 2px rgba(0, 0, 0, 0.15);
+    font-family: "miiverse" !important;
+    pointer-events: none;
+}
+
+* {
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+.bsky-post-modal .spoiler-button:active:after {
+    background: none;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+.bottom-buttons a:active:not(.disabled) {
+    background: linear-gradient(180deg, #8d8d8d, #c4c4c4, #ffffff);
+    color: #fff;
+    text-shadow: 0px 2px rgba(0, 0, 0, 0.50);
+}
+
+.bsky-post-modal .spoiler-button:has(input:checked)::after {
+    content: "v";
+    font-weight: bold;
+    color: #fff;
+    line-height: 1.6;
+    font-size: 32px;
+    text-shadow: 0px -2px rgba(0, 0, 0, 0.30);
+    background: linear-gradient(180deg, #86ebff, #00b9f0);
+}
+
+.bsky-post-modal .spoiler-button:active:has(input:checked)::after {
+    background: none;
+    box-shadow: none;
+    color: #9e2f00;
+    text-shadow: none;
+    line-height: 1.8;
+}
+
+.bsky-post-modal .icon {
+    width: 78px;
+    height: 78px;
+    float: left;
+    background: #fff;
+    border-radius: 5px;
+    margin-left: 20px;
+}
+
+.bsky-post-modal .buttons {
+    position: relative;
+    float: left;
+    display: flex;
+    list-style: none;
+    padding: 0 10px;
+    margin: 0;
+    padding-top: 2px;
+    margin-left: 20px;
+    height: 80px;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #000000db, #0000006e);
+}
+
+.bsky-post-modal .buttons li {
+    color: #fff;
+    font-size: 60px;
+    padding: 0 10px;
+    position: relative;
+    font-family: "miiverse" !important;
+    transition: 0.05s;
+}
+
+.bsky-post-modal .buttons li:active:not(:has(input:checked)) {
+    transform: scale(1.1);
+}
+
+.bsky-post-modal .buttons li input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    cursor: pointer;
+    padding: 0;
+    border: 0;
+    opacity: 0;
+    appearance: none;
+}
+
+.bsky-post-modal .buttons li:has(input:checked) {
+    background: #009fd3;
+    color: #3ea4ff;
+    background: linear-gradient(180deg, #76d7ff, #009fd3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.bsky-post-modal textarea {
+    line-height: 1.6;
+    height: 55%;
+    font-size: 29px;
+    margin-top: 70px;
+    border-radius: 0;
+    box-shadow: inset 0px -1px 5px 3px rgba(0, 0, 0, 0.30);
+    border: 0;
+    appearance: none;
+    resize: none;
+    padding: 16px 15px;
+    padding-top: 12px;
+    font-family: "nintendo" !important;
+    position: relative;
+}
+
+.bsky-post-modal .feeling-container {
+    position: relative;
+    margin-top: 20px;
+}
+
+.title-mii {
+    height: 440px;
+    margin: auto;
+    margin-top: -90px;
+    margin-bottom: -30px;
+    display: flex;
+    position: relative;
+}
+
+.title-menu {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding-bottom: 100px;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-menu a,
+.button {
+    position: relative;
+    transition: 0.1s;
+    -webkit-user-drag: none;
+    user-drag: none;
+    z-index: 900;
+}
+
+.title-menu a:hover,
+.button:hover:not(.disabled) {
+    transform: scale(1.05);
+}
+
+.title-menu a:active,
+.button:active:not(.disabled) {
+    transform: scale(0.9);
+}
+
+
+.title-menu .start,
+.button {
+    width: 230px;
+    height: 65px;
+    border-radius: 15px;
+    font-size: 28px;
+    display: flex;
+    color: #323232;
+    text-shadow: 0px 2px #fff;
+    box-shadow: 1px 2px 3px 2px rgba(0, 0, 0, 0.40);
+    background: linear-gradient(180deg, #ffffff, #d5d5d5);
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+}
+
+.mii-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 40px;
+}
+
+.view-leaderboard {
+    margin-top: 20px;
+    width: 500px;
+}
+
+.bsky-why,
+.bsky-why-fortherecord,
+.bsky-needs-login {
+    margin: auto;
+    padding: 15px 20px;
+    display: block;
+    line-height: 1.5;
+    font-size: 20px;
+    border: 3px dashed #0099bc;
+    margin-top: 30px;
+    border-radius: 12px;
+}
+
+.mii-start-game,
+.mii-return-title {
+    width: 280px;
+    height: 55px;
+    border-radius: 15px;
+    margin: 0 20px;
+    font-size: 25px;
+    display: flex;
+    color: #ffffff;
+    text-shadow: 0px -2px rgba(0, 0, 0, 0.30);
+    box-shadow: 0px 1px 0px 2px rgb(179 5 128);
+    background: linear-gradient(180deg, #ffa6ea, #ff00dd);
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+}
+
+.mii-start-game.disabled {
+    opacity: 0.5;
+}
+
+.title-menu .link-bsky {
+    width: 450px;
+    height: 65px;
+    margin-top: 20px;
+    border-radius: 15px;
+    font-size: 26px;
+    text-align: center;
+    display: flex;
+    color: #fff;
+    text-shadow: 0px -2px rgba(0, 0, 0, 0.30);
+    box-shadow: inset 0px 2px 3px 3px rgba(255, 255, 255, 0.50), 1px 2px 3px 2px rgba(0, 0, 0, 0.50);
+    background: linear-gradient(180deg, #95cdff, #00a0d1);
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+}
+
+.select-mii h1,
+.bsky-link-screen h1,
+.select-mii-file-text h1,
+.select-mii-nnid h1 {
+    text-align: center;
+    margin: 15px 0px;
+}
+
+.form-login-bsky {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.form-login-bsky input {
+    font-size: 23px;
+    padding: 10px;
+    margin: 6px 0px;
+    border: 2px solid #858585;
+    font-family: "nintendo" !important;
+    border-radius: 5px;
+    width: 450px;
+    box-shadow: inset 0px 1px 3px 1px rgba(0, 0, 0, 0.25);
+}
+
+.form-login-bsky .login-bsky-confirm {
+    width: 300px;
+    margin-top: 20px;
+    font-size: 26px;
+    height: 55px;
+    color: #fff;
+    text-shadow: 0px -2px rgba(0, 0, 0, 0.30);
+    box-shadow: inset 0px 2px 3px 3px rgba(255, 255, 255, 0.50), 1px 2px 3px 2px rgba(0, 0, 0, 0.50);
+    background: linear-gradient(180deg, #95cdff, #00a0d1);
+}
+
+.select-mii p,
+.bsky-link-screen p,
+.select-mii-file-text p,
+.select-mii-nnid p {
+    width: var(--width);
+    margin: auto;
+    text-align: center;
+    font-size: 18px;
+    padding: 0 20px;
+}
+
+.mii-uploading,
+.mii-nnid-uploading {
+    padding: 10px;
+    display: block;
+    text-align: center;
+    margin: auto;
+    font-size: 18px;
+    border-radius: 20px;
+    line-height: 1.6;
+    background: #cdcdcd;
+    margin-bottom: 20px;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.30);
+}
+
+.mii-nnid-uploading input {
+    padding: 10px;
+    margin: 6px 0px;
+    font-size: 21px;
+    border: 2px solid #858585;
+    font-family: "nintendo" !important;
+    border-radius: 6px;
+    width: 450px;
+    box-shadow: inset 0px 1px 3px 1px rgba(0, 0, 0, 0.25), 0px 2px 1px rgba(255, 255, 255, 0.5);
+}
+
+.select-mii .mii-image,
+.select-mii-file-text .mii-image,
+.select-mii-nnid .mii-image {
+    width: 180px;
+    background: #fff;
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+    border: 2px solid #a2a2a2;
+    height: 180px;
+    border-radius: 20px;
+}
+
+.select-mii .mii-name,
+.select-mii-file-text .mii-name,
+.select-mii-nnid .mii-name {
+    text-align: center;
+    background: #747474;
+    width: 300px;
+    min-height: 50px;
+    display: flex;
+    margin: auto;
+    font-family: "nintendo" !important;
+    color: #fff;
+    border: 0;
+    font-size: 21px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-radius: 70px;
+    justify-content: center;
+    align-items: center;
+}
+
+.select-mii .mii-name::placeholder,
+.select-mii-file-text .mii-name::placeholder,
+.select-mii-nnid .mii-name::placeholder {
+    color: #e4e4e4;
+}
+
+.select-mii .mii-uploading {
+    width: 800px;
+    margin: auto;
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+    padding: 10px 10px;
+    border-radius: 20px;
+}
+
+.mii-head {
+    position: absolute;
+    top: 10px;
+    left: -30px;
+    z-index: 1;
+}
+
+.mii-head.front {
+    top: -51px;
+    left: -60px;
+    width: 670px;
+    transition: 0.15s;
+    z-index: 1;
+}
+
+.mii-body {
+    position: absolute;
+    top: -52px;
+    left: -60px;
+    width: 670px;
+}
+
+.gameplay {
+    background-color: #ffc45c;
+    background-image: url(../img/BGDot.png);
+    background-repeat: repeat;
+    animation: bg-scroll 1s linear infinite;
+    background-size: 64px;
+    overflow: hidden;
+}
+
+.gameplay .hud {
+    top: 0;
+    position: absolute;
+    left: 0;
+}
+
+.gameplay .hud>p {
+    font-size: 28px;
+    margin: 10px 20px;
+    text-shadow: 0px 3px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes bg-scroll {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: -64px -64px;
+    }
+}
+
+.after-gameplay-return,
+.login-bsky-return,
+.return-mii-data-uploading,
+.return-nnid-uploading,
+.return-from-records {
+    width: 600px;
+    margin: auto;
+    font-size: 26px;
+    height: 60px;
+}
+
+.post-record {
+    width: 600px;
+    margin: auto;
+}
+
+.post-bsky-record {
+    width: 600px;
+    margin: auto;
+    margin-top: 20px;
+    color: #fff;
+    text-shadow: 0px -2px rgba(0, 0, 0, 0.30);
+    box-shadow: inset 0px 2px 3px 3px rgba(255, 255, 255, 0.50), 1px 2px 3px 2px rgba(0, 0, 0, 0.50);
+    background: linear-gradient(180deg, #95cdff, #00a0d1);
+}
+
+.post-bsky-record.disabled,
+.post-record.disabled,
+.login-bsky-confirm.disabled {
+    opacity: 0.5;
+}
+
+.mii {
+    position: absolute;
+    bottom: 600px;
+    left: 0;
+}
+
+.celebrate {
+    margin: 40px auto;
+    font-size: 30px;
+    padding: 0 30px;
+    text-align: center;
+    font-family: "Comic Sans MS" !important;
+    display: block;
+}
+
+.celebrate.bad {
+    color: #ff1c1c;
+}
+
+.celebrate.good,
+.celebrate.wow {
+    color: #31c200;
+}
+
+.celebrate.woah {
+    color: #ed9f00;
+}
+
+.celebrate.holy-shit,
+.celebrate.holy-shit2,
+.celebrate.holy-shit3 {
+    color: #00a1b7;
+}
+
+.celebrate.holy-chud {
+    color: #db008f;
+    font-size: 36px;
+}
+
+.preview-selected-mii .mii-image {
+    width: 155px;
+    height: 155px;
+}
+
+.option-data-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.option-data-menu a {
+    width: 500px;
+    padding: 5px 10px;
+    font-size: 20px;
+    height: 55px;
+    margin-bottom: 15px;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.leaderboard-screen h1 {
+    margin: 20px auto;
+    text-align: center;
+    font-size: 32px;
+    width: 500px;
+    color: #fff;
+    height: 60px;
+    border-bottom: 4px solid #d85d00;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.20);
+    padding: 10px 25px;
+    display: flex;
+    background: linear-gradient(180deg, #ffbd85, #ff8a23);
+    text-shadow: 0px -2px rgba(0, 0, 0, 0.20);
+    border-radius: 40px;
+    align-items: center;
+    justify-content: center;
+}
+
+.leaderboard-screen h2 {
+    text-align: center;
+    font-size: 29px;
+    margin: 15px auto;
+    color: #f44200;
+    padding-bottom: 8px;
+    border-bottom: 3px dashed;
+}
+
+.leaderboard-screen .score-navi {
+    display: flex;
+}
+
+.leaderboard-screen .score-navi a {
+    text-shadow: 0px 2px rgba(0, 0, 0, 0.25);
+    display: flex;
+    width: 25%;
+    align-items: center;
+    font-size: 20px;
+    border-bottom: 3px solid #e800c1;
+    border-right: 1px solid rgba(0, 0, 0, 0.30);
+    border-left: 1px solid rgba(255, 255, 255, 0.30);
+    height: 60px;
+    text-align: center;
+    background: #ff69c3;
+    color: #fff;
+    justify-content: center;
+}
+
+.leaderboard-screen .score-navi a:first-child {
+    border-left: none;
+}
+
+.leaderboard-screen .score-navi a:last-child {
+    border-right: none;
+}
+
+.leaderboard-screen .score-navi a.selected {
+    border-bottom: none;
+    background: #ff43b4;
+    text-shadow: 0px -2px rgba(0, 0, 0, 0.25);
+}
+
+.leaderboard-screen .score-navi a.disabled {
+    background: #afafaf;
+    color: #6e6e6e;
+    border: 0;
+    text-shadow: 0px 1px rgba(255, 255, 255, 0.5);
+}
+
+.leaderboard-screen .user-container {
+    background: #dadada;
+    margin-top: 25px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100px;
+}
+
+.leaderboard-screen .user-container .has-bsky-post {
+    font-family: "miiverse" !important;
+    font-size: 35px;
+    position: absolute;
+    top: 60px;
+    color: #595959;
+    right: 20px;
+    opacity: 0;
+    text-shadow: 1px 1px #fff;
+}
+
+.leaderboard-screen .user-container .has-bsky-post.has {
+    opacity: 1 !important;
+}
+
+.leaderboard-screen .post-preview {
+    background: #fff;
+    width: 500px;
+    pointer-events: none;
+    height: 100px;
+    padding: 10px 13px;
+    top: 100px;
+    color: #323232;
+    left: 32px;
+    box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.40);
+    z-index: 2;
+    border-radius: 10px;
+    position: absolute;
+}
+
+.leaderboard-screen .post-preview.spoiler {
+    color: #858585;
+    font-size: 22px;
+    text-align: center;
+    padding-top: 16px;
+    line-height: 1.4;
+}
+
+.loading-screen .loader {
+    width: 220px;
+    height: 220px;
+    background: url(../img/wheel1.png);
+    background-size: 220px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.end-screen h1 {
+    padding: 0 20px;
+}
+
+.loader-fixed {
+    width: 100px;
+    height: 100px;
+    background: url(../img/wheel1.png);
+    background-size: 100px;
+    position: absolute;
+    z-index: 100000;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+}
+
+.loader-fixed:after {
+    content: "";
+    width: 100px;
+    height: 100px;
+    background: url(../img/wheel.png);
+    background-size: 100px;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    animation: spin 1s linear infinite;
+}
+
+.loading-screen .loader:after {
+    content: "";
+    width: 220px;
+    height: 220px;
+    background: url(../img/wheel.png);
+    background-size: 220px;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.leaderboard-screen .post-preview::before {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 5%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #ffffff;
+    z-index: 1;
+}
+
+.leaderboard-screen .post-preview::after {
+    content: "";
+    position: absolute;
+    top: -9px;
+    left: 5%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 9px solid #b8b8b8;
+}
+
+.leaderboard-screen .user-container>a:last-child {
+    border-bottom: none;
+}
+
+.leaderboard-screen .user-container>a:last-child .post-preview {
+    top: -95px;
+}
+
+.leaderboard-screen .user-container>a:last-child .post-preview:before {
+    top: 100px;
+    transform: translateX(-50%) rotate(180deg);
+}
+
+.leaderboard-screen .user-container>a:last-child .post-preview:after {
+    top: 101px;
+    transform: translateX(-50%) rotate(180deg);
+}
+
+.leaderboard-screen .post-preview p {
+    height: auto;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    margin: 0;
+    font-size: 20px;
+}
+
+.leaderboard-screen .user-container>a {
+    border-bottom: 3px dashed #fff;
+    display: flex;
+    position: relative;
+}
+
+.leaderboard-screen .user-container>a:hover {
+    transform: scale(1.04);
+    z-index: 19;
+}
+
+.leaderboard-screen .user-container a[data-has-post="1"]:hover>.post-preview {
+    display: block !important;
+}
+
+.leaderboard-screen .user-container>a:active {
+    transform: scale(0.98);
+}
+
+.leaderboard-screen .user-container img {
+    height: 110px;
+    width: 110px;
+}
+
+.leaderboard-screen .meta {
+    display: flex;
+    color: #323232;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.leaderboard-screen .meta .name {
+    margin: 0;
+    padding-bottom: 10px;
+    font-size: 26px;
+}
+
+.leaderboard-screen .meta .date {
+    margin: 0;
+    font-size: 22px;
+    color: #5d5d5d;
+}
+
+.leaderboard-screen .score {
+    font-size: 22px;
+    position: absolute;
+    right: 20px;
+    color: #f06d00;
+}
+
+.leaderboard-screen .score>span {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.mii-score-details-modal-container {
+    position: fixed;
+    z-index: 9999;
+    top: 50%;
+    overflow: hidden;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: var(--width);
+}
+
+.mii-score-details-modal {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.75);
+    background-image: url(../img/pattern.png);
+    background-size: 16px;
+    z-index: 2;
+    height: var(--height);
+    display: flex;
+    overflow-y: auto;
+    margin: auto;
+    flex-direction: column;
+}
+
+.mii-score-details-modal .bsky-meta {
+    margin: 25px;
+    box-shadow: 0px 2px 2px -1px rgba(255, 255, 255, 0.2);
+    margin-top: 0;
+    position: absolute;
+    top: 90px;
+    left: 160px;
+    width: 74%;
+    margin-left: 30px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 15px;
+    border-radius: 6px;
+}
+
+.mii-score-details-modal .bsky-meta img {
+    width: 60px;
+    float: left;
+    height: 60px;
+    border-radius: 50px;
+}
+
+.mii-score-details-modal .bsky-meta .screen_name {
+    float: left;
+    font-size: 28px;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 5px;
+    width: 85%;
+    margin-left: 15px;
+}
+
+.mii-score-details-modal .bsky-meta .username {
+    float: right;
+    margin: 0;
+    font-size: 22px;
+    text-align: right;
+    padding-top: 7px;
+    padding-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 85%;
+    color: #c8c8c8;
+}
+
+.mii-score-details-modal .post-content {
+    background: #fff;
+    margin: 10px auto;
+    width: 95%;
+    font-size: 23px;
+    color: #323232;
+    white-space: pre-line;
+    word-wrap: break-word;
+    line-height: 1.5;
+    padding: 0 20px;
+    margin-top: 6px;
+    margin-bottom: 100px;
+    border-top: 10px solid #fff;
+    border-bottom: 10px solid #fff;
+    border-radius: 10px;
+}
+
+.mii-score-details-modal-container .bottom-buttons {
+    z-index: 99;
+    position: fixed;
+    bottom: 0;
+    box-shadow: 0px -2px 0px rgba(0, 0, 0, 0.25);
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+.mii-score-details-modal .record {
+    font-size: 27px;
+    text-align: left;
+    margin: 10px auto;
+    width: 95%;
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 6px 20px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.mii-score-details-modal .record>span {
+    font-size: 33px;
+    padding-left: 10px;
+    color: #ff5e1e;
+}
+
+.mii-score-details-modal .record .date {
+    display: block;
+    font-size: 22px;
+    padding: 5px 0px;
+    color: #6e6e6e;
+}
+
+.mii-score-details-modal .mii-meta img {
+    width: 140px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    float: left;
+    margin: 25px;
+    margin-left: 30px;
+}
+
+.mii-score-details-modal .mii-name {
+    float: left;
+    color: #fff;
+    font-size: 35px;
+    text-shadow: 0px -3px rgba(0, 0, 0, 0.40);
+}
+
+@media (max-width: 800px) {
+    :root {
+        --width: 100% !important;
+    }
+
+    .leaderboard-screen .score-navi {
+        flex-direction: column;
+    }
+
+    .leaderboard-screen .score-navi a {
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid rgba(0, 0, 0, 0.30);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.30);
+        font-size: 23px;
+        width: 98%;
+        margin: auto;
+    }
+
+    .leaderboard-screen .score>span {
+        font-size: 25px;
+    }
+
+    .post-record,
+    .post-bsky-record {
+        width: 90%;
+        padding: 0 20px;
+        text-align: center;
+        font-size: 24px;
+        line-height: 1;
+    }
+
+    .leaderboard-screen .user-container img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .after-gameplay-return,
+    .login-bsky-return,
+    .return-mii-data-uploading,
+    .return-nnid-uploading,
+    .return-from-records {
+        width: 95%;
+    }
+
+    .leaderboard-screen .score {
+        margin: 0;
+        margin-top: 15px;
+    }
+
+    .option-data-menu a {
+        width: 90%;
+        min-height: 50px;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .mii-nnid-uploading input {
+        width: 95%;
+        font-size: 18px;
+    }
+
+    .mii-score-details-modal .mii-meta img {
+        width: 110px;
+    }
+
+    .mii-score-details-modal .bsky-meta {
+        left: auto;
+        width: 95%;
+        top: auto;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .mii-score-details-modal .record {
+        margin-top: 20px;
+    }
+
+    .mii-score-details-modal .bsky-meta .screen_name,
+    .mii-score-details-modal .bsky-meta .username {
+        width: 80%;
+    }
+
+    .mii-score-details-modal .bsky-meta .screen_name {
+        width: 80%;
+        margin: 0;
+        margin-top: 2px;
+        margin-left: 15px;
+    }
+
+    .title-menu .link-bsky {
+        width: 98%;
+    }
+
+    .form-login-bsky input {
+        width: 95%;
+    }
+
+    .leaderboard-screen h2 {
+        margin: 15px 10px;
+    }
+
+    .leaderboard-screen h1 {
+        width: 95%;
+        font-size: 28px;
+        line-height: 1;
+    }
+
+    .leaderboard-screen .score-navi a.selected {
+        box-shadow: 0px -2px 7px -1px inset rgba(0, 0, 0, 0.20);
+    }
+}
+
+@media (max-width: 700px) {
+    .mii-score-details-modal-container .bottom-buttons a {
+        font-size: 24px;
+        line-height: 1;
+    }
+}
+
+@media (max-width: 580px) {
+
+    .leaderboard-screen .post-preview {
+        width: 90%;
+        left: 22px;
+    }
+
+    .title-mii {
+        width: 100%;
+        height: auto;
+        margin-top: -70px;
+    }
+
+    .bsky-post-modal .icon {
+        display: none;
+    }
+
+    .logo {
+        width: auto;
+        height: 50%;
+    }
+
+    .logo p {
+        bottom: 2px;
+        right: 20px;
+    }
+
+    .leaderboard-screen .user-container img {
+        width: 90px;
+        height: 90px;
+    }
+
+    .mii {
+        left: -90px;
+    }
+
+    .leaderboard-screen .user-container>a {
+        padding-top: 34px;
+    }
+
+    .leaderboard-screen .score {
+        margin: 0;
+        display: block;
+        top: 8px;
+        font-size: 20px;
+        border-bottom: 3px dashed;
+    }
+
+    .leaderboard-screen .score>span {
+        font-size: 22px;
+    }
+
+    .leaderboard-screen .meta .name {
+        padding-bottom: 7px;
+        padding-top: 10px;
+    }
+
+    .leaderboard-screen .user-container .has-bsky-post {
+        font-size: 30px;
+        top: 8px;
+        left: 20px;
+        right: auto;
+    }
+
+    .leaderboard-screen .meta .date {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 510px) {
+    .logo p {
+        bottom: 0px;
+        font-size: 20px;
+    }
+
+    .mii-score-details-modal .bsky-meta img {
+        width: 48px;
+        height: 48px;
+    }
+
+    .mii-score-details-modal .bsky-meta .screen_name {
+        font-size: 25px;
+    }
+
+    .mii-score-details-modal .record {
+        font-size: 26px;
+    }
+
+    .mii-score-details-modal .record>span {
+        font-size: 28px;
+    }
+
+    .bsky-post-modal .buttons {
+        margin: auto;
+        width: 410px;
+        float: none;
+    }
+
+    .mii-score-details-modal .record .date {
+        font-size: 19px;
+    }
+
+    .mii-score-details-modal .post-content {
+        font-size: 20px;
+    }
+
+    .mii-score-details-modal {
+        background-color: rgba(0, 0, 0, 0.85);
+    }
+
+    .mii-score-details-modal .mii-name {
+        font-size: 32px;
+        padding-right: 10px;
+        float: none;
+    }
+
+    .loader-fixed {
+        left: 10px;
+    }
+
+    .loader-fixed,
+    .loader-fixed:after {
+        width: 85px;
+        height: 85px;
+        background-size: 85px;
+    }
+
+    .mii-score-details-modal .mii-meta img {
+        width: 100px;
+        margin-right: 16px;
+        margin-left: 16px;
+    }
+
+    .mii-score-details-modal .bsky-meta .username {
+        font-size: 20px;
+    }
+
+    .view-leaderboard,
+    .bsky-loggedin,
+    .bsky-loggedin a {
+        width: 90%;
+        text-align: center;
+        line-height: 1;
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 425px) {
+    .bsky-post-modal .buttons {
+        width: 100%;
+        padding: 0;
+        padding-top: 2px;
+    }
+}

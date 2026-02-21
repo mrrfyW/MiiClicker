@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>Mii Clicker</title>
+  <meta property="og:title" content="Mii Clicker - Click as much as you want" />
+  <meta property="og:description" content="If you like touching, this is for you!" />
+  <meta name="description" content="If you like touching and Miis, this is for you!" />
+  <link rel="preload" href="font/nintendoNTLG-DB001.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fowel.css">
+  <link rel="icon" href="img/charline.png">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/mock-api.js"></script>
+  <script src="js/fowel.js"></script>
+</head>
+
+<body>
+  <div class="loader-fixed" style="display: none;">
+  </div>
+
+  <div class="loading-screen screen">
+    <div class="loader">
+    </div>
+  </div>
+
+  <div class="title-screen screen">
+    <p style="
+    padding: 15px 20px;
+    font-size: 22px;
+    margin: 0;
+    background: #ffed00;
+    box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.45);
+">This is the local version of Mii Clicker. The leaderboard will show archived scores provided by David.</p>
+    <div class="logo">
+      <img src="img/click-logo.png">
+      <p>People have played <span>856</span> times!</p>
+    </div>
+    <img src="img/title_chr1.png" class="title-mii">
+    <div class="title-menu">
+      <a href="javascript:void(0)" class="start">Start</a>
+      <a href="javascript:void(0)" class="button view-leaderboard">View Leaderboard (Top 100)</a>
+      <a href="javascript:void(0)" class="link-bsky">Link your Bluesky account</a>
+      <div class="bsky-loggedin" style="display: none;">
+        <p>Logged in to Bluesky:<br><span></span></p>
+        <a href="javascript:void(0)" class="button logout-bsky">Log Out</a>
+      </div>
+      <p class="bsky-why">If you link your Bluesky account, you will be able to attach a post after a game session, along
+        with your records, you will also be able to see other users records, along with their posts.
+        <br>
+        <br>
+        •It is not required to link Bluesky to upload clicking records.
+        <br>
+        •It is recommended to use an App Password to link your account, in order to do so, enter Bluesky, go to "Settings" > "Privacy and security"> "App Password" > "+ Add App Password",
+        keep the "Allow access to direct messages" checkbox off, give it any name you want, then copy it and put it on the link screen in here.
+      </p>
+    </div>
+  </div>
+
+  <div class="select-mii screen">
+    <h1>Select a Mii</h1>
+    <p>Please submit a Mii to use during gameplay.</p>
+
+    <div class="preview-selected-mii">
+      <p>Currently using this Mii:</p>
+      <img class="mii-image" src="img/noMii.png">
+      <input type="text" placeholder="Mii name..." maxlength="10" class="mii-name">
+    </div>
+
+    <div class="option-data-menu">
+      <a href="javascript:void(0)" class="button option mii-data-screen">
+        <span>Use a Mii format data file/text</span>
+      </a>
+      <a href="javascript:void(0)" class="button option mii-nnid-screen">
+        <span>Use a Mii from a Nintendo Network ID/<br>Pretendo Network ID</span>
+      </a>
+    </div>
+
+    <div class="mii-buttons">
+      <a href="javascript:void(0)" class="button mii-return-title">Back</a>
+      <a href="javascript:void(0)" class="button mii-start-game disabled">Start</a>
+    </div>
+
+  </div>
+
+  <div class="select-mii-file-text screen">
+    <h1>Use a Mii format data file/text</h1>
+    <p>Mii Creator format Miis (.miic) are not supported.<br>
+      To get Mii data from Mii Creator, select the Mii and choose how to export its data.</p>
+    <div class="preview-select-data-text">
+      <img class="mii-image" src="img/noMii.png">
+      <input type="text" disabled placeholder="Mii name..." maxlength="10" class="mii-name">
+    </div>
+
+    <div class="mii-uploading">
+      <label for="mii-input">Upload compatible Mii data file:</label>
+      <input type="file" id="mii-input"><br>
+      <label for="mii-text-input">or also paste compatible Mii data in text form:</label>
+      <input type="text" id="mii-text-input" placeholder="Enter Mii data here...">
+    </div>
+
+    <a href="javascript:void(0)" class="button return-mii-data-uploading">Back</a>
+    <p><br><br></p>
+  </div>
+
+  <div class="select-mii-nnid screen">
+    <h1>Use a Mii from a Nintendo Network ID/<br>Pretendo Network ID</h1>
+    <p>You can enter either a valid Nintendo Network ID or Pretendo Network ID<br>
+      Miis attached to NNIDs made during 2024 and after will not be returned.</p>
+    <div class="preview-select-nnid">
+      <img class="mii-image" src="img/noMii.png">
+      <input type="text" disabled placeholder="Mii name..." maxlength="10" class="mii-name">
+    </div>
+
+    <div class="mii-nnid-uploading">
+      <label for="mii-nnid-input-form">Enter a Nintendo Network ID</label>
+      <br>
+      <input type="text" id="mii-nnid-input-form" placeholder="Enter the Nintendo Network ID here...">
+      <br><label for="mii-pnid-input-form">or a Pretendo Network ID</label>
+      <br>
+      <input type="text" id="mii-pnid-input-form" placeholder="Enter the Pretendo Network ID here...">
+    </div>
+
+    <a href="javascript:void(0)" class="button return-nnid-uploading">Back</a>
+    <p><br><br></p>
+  </div>
+
+  <div class="gameplay screen">
+    <div class="hud">
+      <p>Clicks: <span class="click-hud">-</span></p>
+      <p>Time left: <span class="click-tleft">-</span></p>
+    </div>
+    <div class="mii">
+      <img src="img/noMii.png" class="back mii-head" style="display: none;">
+      <img src="img/noMii.png" class="mii-body">
+      <img src="img/noMii.png" class="front mii-head">
+    </div>
+  </div>
+
+  <div class="end-screen screen">
+    <h1>Record: <span>-</span></h1>
+    <a href="javascript:void(0)" class="button post-record">Upload Record</a>
+    <a href="javascript:void(0)" class="button post-bsky-record disabled">Upload Record with Message</a>
+    <p class="bsky-needs-login" style="display: none;">
+      To attach a message to your records, you need to sign up/sign in to
+      Bluesky, for more information, check the text below the title screen.
+    </p>
+    <p class="celebrate holy-chud" style="display: none;">Touch some grass, chud.</p>
+    <p class="celebrate holy-shit3" style="display: none;">...</p>
+    <p class="celebrate holy-shit2" style="display: none;">Dude.</p>
+    <p class="celebrate holy-shit" style="display: none;">Oh my fucking god</p>
+    <p class="celebrate woah" style="display: none;">I gotta say, you definitely put a lot of effort into this.!</p>
+    <p class="celebrate wow" style="display: none;">You did really good!! You deserve a cupcake !!</p>
+    <p class="celebrate good" style="display: none;">Great Job!!!!!!!!!!!!!!!</p>
+    <p class="celebrate bad" style="display: none;">You did fricken awful, loser.!!!</p>
+    <p class="celebrate lazy" style="display: none;">Dont tell anyone but Hugh Morris makes me horny.</p>
+    <a href="javascript:void(0)" class="button after-gameplay-return">Return to Title Screen</a>
+    <p><br><br></p>
+  </div>
+
+  <div class="bsky-link-screen screen">
+    <h1>Log in to Bluesky</h1>
+    <p>•This game only makes use of your Bluesky account when prompted to upload your records to a server with an attached post.
+      <br><br>
+      •You can log out anytime by selecting "Log Out" on the title screen.
+      <br><br>
+      <strong>Note:</strong> You cannot log into Bluesky through this local version.
+    </p>
+    <div class="form-login-bsky">
+      <input type="text" name="user" placeholder="Enter your username...">
+      <input type="password" name="pswd" placeholder="Enter your App Password...">
+      <a href="javascript:void(0)" class="button login-bsky-confirm">Login</a>
+    </div>
+    <a href="javascript:void(0)" class="button login-bsky-return">Return to Title Screen</a>
+    <p><br><br></p>
+  </div>
+
+  <div class="leaderboard-screen screen">
+    <h1>Leaderboard (Top 100)</h1>
+    <h2 class="all-time-text">All-Time Records:</h2>
+    <h2 class="today-text" style="display: none;">Today's Records:</h2>
+    <h2 class="followings-text" style="display: none;">Records from Followings:</h2>
+    <h2 class="myself-text" style="display: none;">Records from Myself:</h2>
+    <div class="score-navi">
+      <a href="javascript:void(0)" class="alltime selected">All-Time Records</a>
+      <a href="javascript:void(0)" class="today">Today's Records</a>
+      <a href="javascript:void(0)" class="followings disabled">Records from Followings</a>
+      <a href="javascript:void(0)" class="myself">Records from Myself</a>
+    </div>
+    <p class="bsky-why-fortherecord" style="display:none">To view your personal records (with an attached post) and records from your followers and followings,
+      link your Bluesky account, you can do so from the title screen.
+    </p>
+
+    <div class="user-container">
+    </div>
+
+    <a href="javascript:void(0)" class="button return-from-records">Return to Title Screen</a>
+    <p><br><br></p>
+  </div>
+
+  <template id="post-screen-trigger-bsky">
+    <div class="bsky-post-modal">
+      <div class="panel">
+        <div class="feeling-container">
+          <img src="img/noMii.png" class="icon">
+          <ul class="buttons">
+            <li class="checked">
+              C
+              <input type="radio" name="feeling_id" value="0" class="feeling-button-normal" checked="" data-sound="SE_WAVE_MII_FACE_00">
+            </li>
+            <li>
+              H
+              <input type="radio" name="feeling_id" value="1" class="feeling-button-happy" data-sound="SE_WAVE_MII_FACE_01">
+            </li>
+            <li>
+              L
+              <input type="radio" name="feeling_id" value="2" class="feeling-button-like" data-sound="SE_WAVE_MII_FACE_02">
+            </li>
+            <li>
+              O
+              <input type="radio" name="feeling_id" value="3" class="feeling-button-surprised" data-sound="SE_WAVE_MII_FACE_03">
+            </li>
+            <li>
+              G
+              <input type="radio" name="feeling_id" value="4" class="feeling-button-frustrated" data-sound="SE_WAVE_MII_FACE_04">
+            </li>
+            <li>
+              U
+              <input type="radio" name="feeling_id" value="5" class="feeling-button-puzzled" data-sound="SE_WAVE_MII_FACE_05">
+            </li>
+          </ul>
+        </div>
+        <label class="spoiler-button">
+          Spoilers
+          <input type="checkbox" name="is_spoiler" value="1">
+        </label>
+        <textarea value="" maxlength="400" placeholder="Write a post about your record."></textarea>
+
+        <div class="bottom-buttons">
+          <a href="javascript:void(0)" class="panel-button cancel">Cancel</a>
+          <a href="javascript:void(0)" class="panel-button confirm">Post</a>
+        </div>
+
+      </div>
+    </div>
+  </template>
+
+  <template id="record-screen-mii-template">
+    <a href="javascript:void(0)" class="score-link">
+      <img src="img/noMii.png">
+      <div class="meta">
+        <p class="name"></p>
+        <p class="date"></p>
+      </div>
+      <p class="score">Score:<span></span></p>
+      <span class="has-bsky-post">p</span>
+      <div class="post-preview" style="display: none;">
+        <p></p>
+      </div>
+    </a>
+  </template>
+
+
+  <template id="view-mii-score-details">
+    <div class="mii-score-details-modal-container">
+      <div class="mii-score-details-modal">
+        <div class="mii-meta">
+          <img src="img/noMii.png">
+          <p class="mii-name"></p>
+        </div>
+        <a href="javascript:void(0)" target="_blank" class="bsky-meta">
+          <img src="img/noMii.png">
+          <p class="screen_name"></p>
+          <p class="username"></p>
+        </a>
+        <p class="record">Record:<span></span>
+          <span class="date"></span>
+        </p>
+        <p class="post-content"></p>
+      </div>
+      <div class="bottom-buttons">
+        <a href="javascript:void(0)" class="close-record-view">Close</a>
+        <a href="javascript:void(0)" target="_blank" class="view-post-bsky">View post on Bluesky</a>
+      </div>
+    </div>
+  </template>
+
+</body>
+
+</html>

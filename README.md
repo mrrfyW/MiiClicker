@@ -37,12 +37,12 @@ Press `Ctrl+C` in the terminal to stop the server when done.
 ---
 
 ## Notes
-- Rendering Miis still work because it uses an external API at `mii-unsecure.ariankordi.net`, and requires an internet connection to work properly.
+- Rendering Miis still work because the original site uses an external API (see fowel.js), and requires an internet connection to work properly.
 - Your own scores are saved in your browser's `localStorage` under `mii_clicker_local_records`, and will persist between sessions.
 - Fake BlueSky authentications will go into your browser's cookies. Don't type any real login details, just in case you get hacked!
 - To see the full list of records and posts, go to mock-api.js and find the `_ALLTIME_RECORDS` variable.
 
 ---
 
-*Mii Clicker was created by David Joaq (@dwyazzo90). Mii rendering API is by Arian Kordi (@ariankordi) and can be found at (mii-unsecure.ariankordi.net).*  
+*Mii Clicker was created by David Joaq (@dwyazzo90). Mii rendering API is by Arian Kordi (@ariankordi) and can be found at https://mii-unsecure.ariankordi.net.*  
 *This local version was preserved for archival purposes, and is not affiliated with Project Rosé.*

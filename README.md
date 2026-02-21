@@ -1,10 +1,8 @@
 # Mii Clicker - Local Version
 This is a preserved and playable version of **Mii Clicker** (originally at [miis.whatastupididea.com](https://miis.whatastupididea.com)), archived before its shutdown on February 20th, 2026 at roughly 10:01:10 PM EST.
-
-*Fun Fact: This was first known on Februrary 1st, 2026 at 11:15:47 PM EST, but the database has entries starting from January 30th, 2026 at 11:45:08 PM EST.*
 - **Mii Clicker** was originally created by [@dwyazzo90](https://github.com/dwyazzo90) (David Joaq).
 - Mii rendering API is by [@ariankordi](https://github.com/ariankordi) and can be found at **[mii-unsecure.ariankordi.net](https://mii-unsecure.ariankordi.net)**.
-- This local version was preserved for archival purposes, and is not affiliated with Project Rosé.
+- This local version was preserved for archival purposes, and is not affiliated with Project Rosé. If either David or Arian see this, feel free to contact me on Discord to tell me if this is okay to keep up or not.
 
 ## Prerequisites
 You need **Python**/**Python3** installed (which comes pre-installed on macOS and most Linux distros; but its downloadable at **[python.org](https://python.org)** for Windows) to run the server.
@@ -38,3 +36,8 @@ Press `Ctrl+C` in the terminal to stop the server when done, or end the Python t
 - Your own scores are saved in your browser's `localStorage` under `mii_clicker_local_records`, and will persist between sessions.
 - Fake BlueSky authentications will go into your browser's cookies. Don't type any real login details, just in case you get hacked!
 - To see the full list of records and posts, go to mock-api.js and find the `_ALLTIME_RECORDS` variable.
+
+## Fun Facts
+- This game was first announced on Februrary 1st, 2026 at 11:15:47 PM EST, but the database has entries starting from January 30th, 2026 at 11:45:08 PM EST.
+- Over 856 entries were logged in the final database of scores.
+- There was only one YouTube video made on this game before its closure. Check it out [here](https://www.youtube.com/watch?v=CNEpVKelteU).

@@ -1,5 +1,5 @@
 # Mii Clicker - Local Version
-This is a preserved and playable version of **Mii Clicker** (originally at `https://miis.whatastupididea.com`), archived before its shutdown on February 20th, 2026 at roughly 10:01:10 PM EST.
+This is a preserved and playable version of **Mii Clicker** (originally at [miis.whatastupididea.com](https://miis.whatastupididea.com)), archived before its shutdown on February 20th, 2026 at roughly 10:01:10 PM EST.
 
 ---
 
@@ -16,7 +16,7 @@ Step 2: Start the Server
 - Run this command: `python3 server.py`
 
 Step 3: Open the Game
-- Open your browser and go to: `http://localhost:8080`
+- Open your browser and go to: [http://localhost:8080](http://localhost:8080)
 
 Press `Ctrl+C` in the terminal to stop the server when done.
 
@@ -44,5 +44,5 @@ Press `Ctrl+C` in the terminal to stop the server when done.
 
 ---
 
-*Mii Clicker was created by @dwyazzo90 (David Joaq). Mii rendering API is by @ariankordi and can be found at `https://mii-unsecure.ariankordi.net`.*  
+*Mii Clicker was created by [@dwyazzo90](https://github.com/dwyazzo90) (David Joaq). Mii rendering API is by [@ariankordi](https://github.com/ariankordi) and can be found at [mii-unsecure.ariankordi.net](https://mii-unsecure.ariankordi.net)`.*  
 *This local version was preserved for archival purposes, and is not affiliated with Project Rosé.*

@@ -1,11 +1,13 @@
 # Mii Clicker - Local Version
 This is a preserved and playable version of **Mii Clicker** (originally at [miis.whatastupididea.com](https://miis.whatastupididea.com)), archived before its shutdown on February 20th, 2026 at roughly 10:01:10 PM EST.
-- Mii Clicker was originally created by [@dwyazzo90](https://github.com/dwyazzo90) (David Joaq).
-- Mii rendering API is by [@ariankordi](https://github.com/ariankordi) and can be found at [mii-unsecure.ariankordi.net](https://mii-unsecure.ariankordi.net).
+
+*Fun Fact: This was first known on Februrary 1st, 2026 at 11:15:47 PM EST, but the database has entries starting from January 30th, 2026 at 11:45:08 PM EST.*
+- **Mii Clicker** was originally created by [@dwyazzo90](https://github.com/dwyazzo90) (David Joaq).
+- Mii rendering API is by [@ariankordi](https://github.com/ariankordi) and can be found at **[mii-unsecure.ariankordi.net](https://mii-unsecure.ariankordi.net)**.
 - This local version was preserved for archival purposes, and is not affiliated with Project Rosé.
 
 ## Prerequisites
-You need Python/Python3 installed (which comes pre-installed on macOS and most Linux distros; but its downloadable at [python.org](https://python.org) for Windows) to run the server.
+You need **Python**/**Python3** installed (which comes pre-installed on macOS and most Linux distros; but its downloadable at **[python.org](https://python.org)** for Windows) to run the server.
 
 ## Steps to Run
 Step 1: Open the Terminal/Command Prompt
@@ -17,7 +19,7 @@ Step 2: Start the Server
 - Run this command: `python3 server.py`
 
 Step 3: Open the Game
-- Open your browser and go to: [http://localhost:8080](http://localhost:8080)
+- Open your browser and go to: **[http://localhost:8080](http://localhost:8080)**
 
 Press `Ctrl+C` in the terminal to stop the server when done, or end the Python task in task manager.
 

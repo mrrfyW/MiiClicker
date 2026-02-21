@@ -19,7 +19,7 @@ Step 2: Start the Server
 Step 3: Open the Game
 - Open your browser and go to: [http://localhost:8080](http://localhost:8080)
 
-Press `Ctrl+C` in the terminal to stop the server when done.
+Press `Ctrl+C` in the terminal to stop the server when done, or end the Python task in task manager.
 
 ## What Works/Doesn't Work
 - ✓ - Home page, with easter eggs and fake BlueSky authentication

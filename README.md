@@ -1,5 +1,5 @@
 # Mii Clicker - Local Version
-This is a preserved and playable version of **Mii Clicker** (originally at `miis.whatastupididea.com`), archived before its shutdown on February 20th, 2026 at roughly 10:01:10 PM EST.
+This is a preserved and playable version of **Mii Clicker** (originally at `https://miis.whatastupididea.com`), archived before its shutdown on February 20th, 2026 at roughly 10:01:10 PM EST.
 
 ---
 
@@ -13,10 +13,10 @@ Step 1: Open the Terminal/Command Prompt
 - **Linux**: Open terminal and `cd` to this folder
 
 Step 2: Start the Server
-- Run this command: **python3 server.py**
+- Run this command: `python3 server.py`
 
 Step 3: Open the Game
-- Open your browser and go to: **http://localhost:8080**
+- Open your browser and go to: `http://localhost:8080`
 
 Press `Ctrl+C` in the terminal to stop the server when done.
 
@@ -27,7 +27,7 @@ Press `Ctrl+C` in the terminal to stop the server when done.
 - All SFX and background music
 - Clicker and its functionality
 - Leaderboard viewing/submitting (includes post data)
-- All submitted scores and posts made from the original server (courtesy of David himself)
+- All submitted scores and posts made from the original server (provided in Project Rosé's Discord server by David himself)
 - Mii rendering via the API
 - Mii data uploads from files or Nintendo/Pretendo Network IDs
 
@@ -44,5 +44,5 @@ Press `Ctrl+C` in the terminal to stop the server when done.
 
 ---
 
-*Mii Clicker was created by David Joaq (@dwyazzo90). Mii rendering API is by Arian Kordi (@ariankordi) and can be found at https://mii-unsecure.ariankordi.net.*  
+*Mii Clicker was created by @dwyazzo90 (David Joaq). Mii rendering API is by @ariankordi and can be found at `https://mii-unsecure.ariankordi.net`.*  
 *This local version was preserved for archival purposes, and is not affiliated with Project Rosé.*

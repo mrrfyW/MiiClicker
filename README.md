@@ -28,8 +28,8 @@ Press `Ctrl+C` in the terminal to stop the server when done, or end the Python t
 - ✓ - Leaderboard viewing/submitting (includes post data if submitted)
 - ✓ - All submitted scores and posts made from the original server (provided in Project Rosé's Discord server by David himself)
 - ✓ - Submitting Miis to be used from files or Nintendo/Pretendo Network IDs, which includes the Mii rendering API
-- ✕ - "People have played" number updates (uses preset number for all the currently stored records, haven't figured out how to update that yet lol)
-- ✕ - Actual BlueSky authentication (it would be a hassle to figure it out myself, lol)
+- ✕ - "People have played" number updates (uses preset number for all the currently stored records, haven't figured out how to update that yet)
+- ✕ - Actual BlueSky authentication (it would be a hassle to figure it out myself)
 
 ## Notes
 - Rendering Miis still works because the original site uses an external API (see fowel.js for how its implemented), and requires an internet connection to properly use the Mii data.
